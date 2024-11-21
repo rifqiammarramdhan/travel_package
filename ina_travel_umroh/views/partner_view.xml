@@ -1,0 +1,77 @@
+    <odoo>
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="after">
+                    <group string="Additional Information">
+                        <group>
+                            <field name="no_ktp"/>
+                            <field name="nama_ayah"/>
+                            <field name="pekerjaan_ayah"/>
+                            <field name="tempat_lahir"/>
+                            <field name="pendidikan"/>
+                            <field name="status_hubungan"/>
+                            <field name="jenis_kelamin"/>
+                        </group>
+                        <group>    
+                            <field name="nama_ibu"/>
+                            <field name="pekerjaan_ibu"/>
+                            <field name="tanggal_lahir"/>
+                            <field name="golongan_darah"/>
+                            <field name="ukuran_baju"/>
+                        </group>
+                    </group>    
+                    <group string="Passport Information">
+                        <group>
+                            <field name="no_passpor"/>
+                            <field name="tanggal_berlaku"/>
+                            <field name="imigrasi"/>
+                        </group>
+                        <group>    
+                            <field name="nama_passpor"/>
+                            <field name="tanggal_expired"/>
+                        </group>
+                    </group>    
+                    <group string="Scan Document">
+                        <group>
+                            <field name="scan_passpor" widget="image"/>
+                            <field name="scan_ktp" widget="image"/>
+                        </group>
+                        <group>    
+                            <field name="scan_buku_nikah" widget="image"/>
+                            <field name="scan_kartu_keluarga" widget="image"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page[@name='sales_purchases']//group[@name='container_row_2']//group[@name='misc']" position="after">
+                    <group string="Travel">
+                            <field name="is_airlines"/>
+                            <field name="is_hotel"/>                 
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    <record id="action_product_jamaah" model="ir.actions.act_window">
+        <field name="name">Jamaah</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('is_jamaah', '=', True)]</field>
+        <field name="context">{'default_is_jamaah': True}</field>
+    </record>
+    <record id="action_product_airlines" model="ir.actions.act_window">
+        <field name="name">Airlines</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('is_airlines', '=', True)]</field>
+        <field name="context">{'default_is_airlines': True}</field>
+    </record>
+    <record id="action_product_hotel" model="ir.actions.act_window">
+        <field name="name">Hotel</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('is_hotel', '=', True)]</field>
+        <field name="context">{'default_is_hotel': True}</field>
+    </record>
+</odoo>

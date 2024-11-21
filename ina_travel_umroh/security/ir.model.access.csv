@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_package_all_users,travel.package,model_travel_package,,1,1,1,1
+access_manifest_all_users,manifest,model_manifest,,1,1,1,1
+access_hotel_line_all_users,hotel.line,model_hotel_line,,1,1,1,1
+access_airline_line_all_users,airline.line,model_airline_line,,1,1,1,1
+access_schedule_line_all_users,schedule.lines,model_schedule_lines,,1,1,1,1
+access_hpp_line_all_users,hpp.lines,model_hpp_lines,,1,1,1,1
+access_passpor_sale_order_all_users,passpor.sale.order,model_passpor_sale_order,,1,1,1,1
+access_sale_order_all_users,sale.order,model_sale_order,,1,1,1,1

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <data>
+    <record id="travel_package_view_list" model="ir.ui.view">
+      <field name="name">travel.package.view.list</field>
+      <field name="model">travel.package</field>
+      <field name="arch" type="xml">
+        <tree string="Travel Package">
+          <field name="ref" />
+          <field name="sale_id" string="Sale"/>
+          <field name="mrp_bom_id" string="Product" />
+          <field name="quota" string="quota" />
+          <field name="remaining_quota" string="Remaining Quota" />
+          <field name="quota_progress" string="Quota Progress" widget="progressbar"/>
+        </tree>
+      </field>
+    </record>
+    <record id="travel_package_view_form" model="ir.ui.view">
+      <field name="name">travel.umroh.travel.package.form</field>
+      <field name="model">travel.package</field>
+      <field name="arch" type="xml">
+          <form string="Travel Package">
+              <header>
+                  <field name="status" widget="statusbar"/>
+                  <button type="object" name="set_toDraft" string="Set To Draft" attrs="{'invisible': [('status', '!=', 'confirm'),('status', '!=', 'cancel')]}"/>
+                  <button type="object" name="set_confirm" string="Confirm" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                  <button type="object" name="func_update_jamaah" string="Update Jamaah" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'confirm')]}"/>
+                  <button type="object" name="set_toDone" string="Done" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'confirm')]}"/>
+                  <button type="object" name="set_cancel" string="Cancel"
+                    attrs="{'invisible': [('status', '==', 'done'),('status', '==', 'cancel')]}"/>
+                  <button name="action_print_report" type="object" string="Cetak Manifest" attrs="{'invisible': [('status', '!=', 'confirm')]}"/>
+                </header>
+              <sheet>
+                  <div class="oe_title">
+                      <h1>
+                          <field name="ref" readonly="true"/>
+                      </h1>
+                  </div>
+                  <group string="Informasi Jadwal">
+                      <group>
+                          <field name="tanggal_berangkat" string="Tanggal Berangkat" required="true" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                      </group>
+                      <group>
+                          <field name="tanggal_kembali" string="Tanggal Kembali" required="true" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                      </group>
+                  </group>
+                  <group string="Produk">
+                      <group>
+                          <field name="sale_id" required="true" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                      </group>
+                      <group>
+                          <field name="mrp_bom_id" string="Packet Product" required="true" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                      </group>
+                  </group>
+                  <group name="seat" string="Seats">
+                      <group>
+                          <field name="quota" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                          <field name="remaining_quota" readonly="true" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                      </group>
+                      <group>
+                          <field name="quota_progress" widget="progressbar" attrs="{'readonly': [('status', '!=', 'draft')]}"/>
+                      </group>
+                  </group>
+                  <notebook>
+                      <page string="Hotel Lines">
+                          <field name="hotel_line" attrs="{'readonly': [('status', '!=', 'draft')]}">
+                              <tree editable="top">
+                                  <field name="partner_id" string="Nama Hotel" domain="[('is_hotel', '=', True)]" context="{'default_is_hotel': True}"/>
+                                  <field name="date_check_in" string="Check In Hotel" />
+                                  <field name="date_check_out"  string="Check Out Hotel"/>
+                                  <field name="city"  string="Kota"/>
+                              </tree>
+                          </field>
+                      </page>
+                      <page string="Airline Lines" >
+                          <field name="airline_line" attrs="{'readonly': [('status', '!=', 'draft')]}">
+                              <tree editable="top">
+                                  <field name="partner_id" string="Nama Airline"  domain="[('is_airlines', '=', True)]" context="{'default_is_airlines': True}"/>
+                                  <field name="tanggal_berangkat" string="Tanggal Berangkat"  />
+                                  <field name="kota_asal" string="Kota Asal"  />
+                                  <field name="kota_tujuan" string="Kota Tujuan"  />
+                              </tree>
+                          </field>
+                      </page>
+                      <page string="Schedule Lines">
+                          <field name="schedule_line"  attrs="{'readonly': [('status', '!=', 'draft')]}">
+                              <tree editable="top">
+                                  <field name="nama_kegiatan" string="Nama Kegiatan"  />
+                                  <field name="tanggal_kegiatan" string="Tanggal Kegiatan"  />
+                              </tree>
+                          </field>
+                      </page>
+                      <page string="Manifest" >
+                          <field name="manifest_line" readonly="True">
+                              <tree editable="top">
+                                  <field name="title" string="Title"  readonly="true"/>
+                                  <field name="nama_panjang" string="Nama Panjang" readonly="true"/>
+                                  <field name="jenis_kelamin" string="Jenis Kelamin" readonly="true"/>
+                                  <field name="no_ktp" string="No. KTP" readonly="true"/>
+                                  <field name="no_passport" string="No. Passport" readonly="true"/>
+                                  <field name="tempat_lahir" string="Tempat Lahir" readonly="true"/>
+                                  <field name="tanggal_berlaku" string="Tanggal Berlaku" readonly="true"/>
+                                  <field name="tanggal_expired" string="Tanggal Expired" readonly="true"/>
+                                  <field name="imigrasi" string="Imigrasi" readonly="true"/>
+                                  <field name="tipe_kamar" string="Tipe Kamar" readonly="true"/>
+                                  <field name="umur" string="Umur" readonly="true"/>
+                                  <field name="mahrom_id" string="Mahrom" readonly="true"/>
+                                  <field name="agent" string="Agent" readonly="true"/>
+                              </tree>
+                          </field>
+                      </page>
+                      <page string="HPP Lines">
+                          <field name="hpp_line" attrs="{'readonly': [('status', '!=', 'draft')]}">
+                              <tree editable="top">
+                                  <field name="barang" string="Nama Barang"  />
+                                  <field name="quantity" string="Quantity"  />
+                                  <field name="units" string="Units"  />
+                                  <field name="unit_price" string="Unit Price"  />
+                                  <field name="subtotal" string="Subtotal"  />
+                              </tree>
+                          </field>
+                          <group string="Total" class="mt16">
+                              <div class="o_row">
+                                  <div class="o_col_4"/>
+                                  <div class="o_col_8">
+                                      <field name="total_cost" string="Total Cost" readonly="True" options="{'no_open': True}" attrs="{'style': 'font-weight: bold; color: black;'}"/>
+                                  </div>
+                              </div>
+                          </group>
+                      </page>
+                  </notebook>
+              </sheet>
+              <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+          </form>
+      </field>
+  </record>
+    <record id="travel_umroh_travel_package_action" model="ir.actions.act_window">
+      <field name="name">TravelPackage</field>
+      <field name="res_model">travel.package</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+          <p name="o_view_nocontent_smiling_face">
+              Travel Package 
+          </p>
+      </field>
+    </record>
+  </data>
+</odoo>

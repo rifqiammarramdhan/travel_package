@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo> 
+    <record id="report_delivery_order_action" model="ir.actions.report">
+        <field name="name">Delivery Order (PDF)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field> <!-- Diubah menjadi PDF -->
+        <field name="report_name">ina_travel_umroh.custom_report_delivery_order_template</field>
+        <field name="report_file">ina_travel_umroh.custom_report_delivery_order_template</field>
+        <field name="print_report_name">"Delivery Order - %s" % (object.name)</field> 
+        <field name="binding_model_id" ref="stock.model_stock_picking"/> 
+        <field name="binding_view_types">action</field>
+    </record>    
+    <record id="report_customer_invoice_action" model="ir.actions.report">
+         <field name="name">Customer Invoice (PDF)</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ina_travel_umroh.report_invoice_template</field> 
+        <field name="print_report_name">'Customer Invoice - ' + object.name</field> 
+        <field name="binding_model_id" ref="model_account_move"/> 
+        <field name="binding_view_types">form</field> 
+    </record>
+    <record id="report_travel_package_action" model="ir.actions.report">
+        <field name="name">Travel Package (XLSX)</field>
+        <field name="model">travel.package</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">ina_travel_umroh.report_travel</field>
+        <field name="report_file">ina_travel_umroh.report_travel_jamaah</field>
+        <field name="print_report_name">'Travel - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_travel_package"/>
+        <field name="binding_view_types">form</field>
+    </record>
+    <report
+    id="report_travel_xlsx"
+    model="travel.package"
+    string="Travel Report XLSX"
+    report_type="xlsx"
+    name="ina_travel_umroh.report_travel"
+    file="ina_travel_umroh.report_travel"
+/>
+</odoo>

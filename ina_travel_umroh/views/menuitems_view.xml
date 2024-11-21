@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem
+        id="menu_dashboard_travel_umroh"
+        name="Travel Umroh"
+        web_icon="ina_travel_umroh,static/image/icon.png"
+        sequence="10"
+        groups=""
+        />
+        <menuitem 
+        id="menu_bar_travel_umroh_master_data" 
+        name="Master Data" 
+        parent="menu_dashboard_travel_umroh"
+        />
+        <menuitem 
+        id="menu_bar_travel_umroh_transactions" 
+        name="Transaction" 
+        parent="menu_dashboard_travel_umroh"
+        />
+        <menuitem
+         id="menu_item_products_tags" 
+         name="Product" 
+         parent="menu_bar_travel_umroh_master_data" 
+         action="sale.product_template_action"
+         />
+         <menuitem
+         id="menu_item_packet_product_tags" 
+         name="Paket Product" 
+         parent="menu_bar_travel_umroh_master_data" 
+         action="mrp.mrp_bom_form_action"
+         />
+         <menuitem
+         id="menu_item_jamaah_tags" 
+         name="jamaah" 
+         parent="menu_bar_travel_umroh_master_data" 
+         action="action_product_jamaah"
+         />
+         <menuitem
+         id="menu_item_airlines_tags" 
+         name="Airlines" 
+         parent="menu_bar_travel_umroh_master_data" 
+         action="ina_travel_umroh.action_product_airlines"
+         />
+         <menuitem
+         id="menu_item_hotel_tags" 
+         name="Hotels" 
+         parent="menu_bar_travel_umroh_master_data" 
+         action="ina_travel_umroh.action_product_hotel"
+         />
+        <menuitem
+        id="menu_item_packet_travel_package_tags" 
+        name="Travel Package" 
+        parent="menu_bar_travel_umroh_transactions" 
+        action="travel_umroh_travel_package_action"
+        />
+        <menuitem
+        id="menu_item_packet_sales_order_tags" 
+        name="Sales Order" 
+        parent="menu_bar_travel_umroh_transactions" 
+        action="sale.action_orders"
+        />
+        <menuitem
+        id="menu_item_packet_customer_invoice_tags" 
+        name="Customer Invoice" 
+        parent="menu_bar_travel_umroh_transactions" 
+        action="mrp.mrp_bom_form_action"
+        />
+
+    </odoo>

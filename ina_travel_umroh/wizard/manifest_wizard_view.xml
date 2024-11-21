@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Wizard Form View -->
+        <record id="view_partner_manifest_wizard_form" model="ir.ui.view">
+            <field name="name">jamaah.wizard.form</field>
+            <field name="model">jamaah.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Passport Line">
+                        <group string="Personal">
+                            <group>
+                                <field name="title"/>
+                                <field name="jamaah_id"/>
+                                <field name="tipe_kamar"/>
+                                <field name="tanggal_lahir"/>
+                            </group>
+                            <group>
+                                <field name="no_ktp"/>
+                                <field name="mahrom_id"/>
+                                <field name="umur"/>
+                                <field name="tempat_lahir"/>
+                            </group>    
+                                
+                        </group>
+                        <group string="Passport Line">
+                            <group> 
+                                <field name="no_passport"/>
+                                <field name="tanggal_berlaku"/>
+                                <field name="imgirasi"/>
+                            </group>
+                            <group>
+                                <field name="nama_passport"/>
+                                <field name="tanggal_expired"/>
+                                <field name="notes"/>    
+                            </group>
+                        </group>
+                        <group string="Scan Document">
+                            <group>
+                                <field name="scan_passpor" widget="image"/>
+                                <field name="scan_ktp" widget="image"/>
+                            </group>
+                            <group>    
+                                <field name="scan_buku_nikah" widget="image"/>
+                                <field name="scan_kartu_keluarga" widget="image"/>
+                            </group>
+                        </group>
+                    <footer>
+                        <button string="Add Jamaah" type="object" name="add_jamaah_to_manifest" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Wizard Action -->
+        <record id="action_open_partner_manifest_wizard" model="ir.actions.act_window">
+            <field name="name">Tambah Jamaah ke Manifest</field>
+            <field name="res_model">jamaah.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_partner_manifest_wizard_form"/>
+            <field name="target">new</field>
+            <field name="context">{'default_sale_order_id': active_id}</field>
+        </record>
+    </data>
+</odoo>

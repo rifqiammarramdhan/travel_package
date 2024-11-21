@@ -1,0 +1,120 @@
+<odoo>
+    <template id="custom_report_delivery_order_template">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <h2 class="text-center">DELIVERY ORDER</h2>
+                <div class="row">
+                    <div class="col-6">
+                        <hr/>
+                        <p><b style="margin-right:10px">Customer</b><t t-esc="docs.partner_id.name"/></p>
+                        <hr/>
+                        <p><b style="margin-right:10px">Address</b><t t-esc="docs.partner_id.city"/></p>
+                        <hr/>
+                        <p><b style="margin-right:10px">Mobile</b><t t-esc="docs.partner_id.phone"/></p>
+                    </div>
+                    <div class="col-6" style="text-align:right;">
+                        <hr/>
+                        <p><b style="margin-right:10px">No</b><t t-esc="docs.name"/></p>
+                        <hr/>
+                        <p><b style="margin-right:10px">Date</b><t t-esc="docs.scheduled_date"/></p>
+                    </div>
+                </div>
+                <table class="table table-sm mt32">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>QTY</th>
+                            <th>Unit of Measure</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-top: 1px solid #ddd;">
+                        <t t-foreach="docs.move_ids" t-as="line">
+                            <tr>
+                                <td><t t-esc="line.product_id.name"/></td>
+                                <td><t t-esc="line.product_uom_qty"/></td>
+                                <td><t t-esc="line.product_uom.name"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div class="mt32" style="border: 1px solid black; padding: 10px;">
+                    <p style="text-align: center;"><strong>Mengetahui</strong></p>
+                    <p style="text-align: center; margin-top: 80px;"><t t-esc="user.name"/></p>
+                </div>
+            </div>
+        </t>
+    </template>    
+    <template id="report_invoice_template" t-name="ina_travel_umroh.report_invoice_template">
+        <t t-call="web.external_layout">
+            <div class="page">
+             <main>
+                <div class="header">
+                    <h2 style="text-align: center;">CUSTOMER INVOICE</h2>
+                </div>
+                <div class="row mt16">
+                    <div class="col-6">
+                        <p><strong>Customer:</strong> <span t-field="docs.partner_id.name"/></p>
+                        <p><strong>Address:</strong> <span t-field="docs.partner_id.city"/></p>
+                        <p><strong>Mobile:</strong> <span t-field="docs.partner_id.phone"/></p>
+                    </div>
+                    <div class="col-6 text-right">
+                            <p><strong>No:</strong> <span t-field="docs.name"/></p> 
+                            <p><strong>Date:</strong> <span t-field="docs.invoice_date" t-options='{"widget": "date"}'/></p>   
+                    </div>
+                </div>
+                <table class="table table-sm mt16">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>QTY</th>
+                            <th>Price Unit</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs.invoice_line_ids" t-as="line"> 
+                            <tr>
+                                <td><t t-esc="line.name"/></td>
+                                <td><t t-esc="line.quantity"/></td>
+                                <td><t t-esc="line.price_unit"/></td>
+                                <td><t t-esc="line.price_subtotal"/></td>
+                            </tr> 
+                         </t> 
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Total</strong></td>
+                            <td><t t-esc="docs.amount_total"/></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <h3>PAYMENT</h3>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Method</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                    <t t-foreach="docs.get_widget_customer_invoice()" t-as="line">
+                        <tr>
+                            <td><span t-esc="line['journal_name']"/></td>
+                            <td><t t-esc="line['date'].strftime('%d %B %Y')"/></td>
+                            <td><t t-esc="line['amount']" t-options='{"widget": "monetary", "display_currency": docs.currency_id}'/></td>
+                        </tr>
+                    </t> 
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Sisa</strong></td>
+                            <td><t t-esc="docs.amount_residual"/></td>
+                        </tr>
+                    </tfoot>
+                </table>       
+                <div class="mt32" style="border: 1px solid black; padding: 10px;">
+                    <p style="text-align: center;"><strong>Finance</strong></p>
+                    <p style="text-align: center; margin-top: 100px;"><t t-esc="user.name"/></p>
+                </div>      
+            </main>
+            </div>
+        </t>
+    </template>
+</odoo>

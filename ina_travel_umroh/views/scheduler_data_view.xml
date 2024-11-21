@@ -1,0 +1,13 @@
+<odoo>
+    <record id="expire_travel_package_cron" model="ir.cron">
+        <field name="name">Update Status Travel Berdasarkan Expire Tanggal Selesai</field>
+        <field name="model_id" ref="ina_travel_umroh.model_travel_package"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_expire_travel()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+    </record>
+</odoo>

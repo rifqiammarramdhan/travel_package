@@ -1,0 +1,27 @@
+- Merapi kan template report
+- Merapihhkan kondisi button
+- merapihkan kodingan sesuai | https://docs.google.com/document/d/1LJ9hxUVtDSbXQF9OgMcd7gxVS5i1iHeM9X0JA3lEPhI/edit?tab=t.0
+
+
+----------------------Done-------------------------------------
+- manifest di sale order = selain draft tidak bisa di edit
+- tavel package ketika bukan draft tidak bisa di edit
+- activity log
+- button pada travel package
+    - Set to draft | Hanya muncul di confirm
+    - confirm jika state == confirm = disable | hanya mucul di draft
+    - done | hanya muncul di confirm
+- manifest di travel package = readonly | tidak bisa di edit
+- travel umroh tampilan list
+- pada function ini    @api.onchange("mrp_bom_id")
+    def _onchange_mrp_bom_id(self):
+    di travel package harus di ubah dengan cara seperti di bawah nya
+
+
+
+// ========================> Odoo Lentera <==========================================//
+Manufacture: -> module BoM 
+
+Forecast:
+mrp dibuat tahunan
+
